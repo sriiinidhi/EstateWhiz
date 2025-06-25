@@ -23,6 +23,7 @@ export default function Signup() {
       return;
     }
     try {
+      setLoading(true);
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
