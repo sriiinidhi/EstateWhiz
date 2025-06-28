@@ -4,6 +4,7 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
+import CreateListing from "./pages/CreateListing";
 import Header from "./components/Header";
 import React from "react";
 import Privateroute from "./components/Privateroute";
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route element={<Privateroute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/create-listing" element={<CreateListing />} />
         </Route>
       </Routes>
     </BrowserRouter>

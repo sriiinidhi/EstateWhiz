@@ -2,9 +2,9 @@ import { useSelector } from "react-redux";
 import { useRef, useState, useEffect, use} from "react";
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage";
 import { app } from "../firebase"; 
-// Ensure you have firebase initialized in this file
 import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure,signOutStart, signOutSuccess, signOutFailure } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { get, set } from "mongoose";
 
 export default function Profile() {
@@ -164,6 +164,8 @@ const handleSignOut = async () => {
         >
           {loading ? "Updating..." : "Update"}
         </button>
+        <Link className='bg-green-700 text-white p-3 rounded-lg
+        uppercase text-center hover:opacity-95' to="/create-listing">Create Listing</Link>
       </form>
       <div className="flex justify-between mt-5">
         <span onClick={handleDeleteUser} className="text-red-700 cursor-pointer">
