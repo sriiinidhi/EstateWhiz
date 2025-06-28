@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, use} from "react";
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage";
 import { app } from "../firebase"; 
 // Ensure you have firebase initialized in this file
-import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure } from "../redux/user/userSlice";
+import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure,signOutStart, signOutSuccess, signOutFailure } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { get, set } from "mongoose";
 
@@ -89,7 +89,30 @@ const handleDeleteUser = async () => {
   } catch (error) {
     dispatch(deleteUserFailure(error.message));
   }
-}
+};
+
+const handleSignOut = async () => {
+  try {
+    dispatch(signOutStart());
+    const res = await fetch('/api/auth/signout', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await res.json();
+    if (data.success === false) {
+      dispatch(signOutFailure(data.message));
+      return;
+    }
+    dispatch(signOutSuccess(data));
+    alert(data.message); // or use a toast notification
+
+  } catch (error) {
+    dispatch(signOutFailure(error.message));
+  }
+};
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -146,7 +169,7 @@ const handleDeleteUser = async () => {
         <span onClick={handleDeleteUser} className="text-red-700 cursor-pointer">
           Delete account
         </span>
-        <span className="text-red-700 cursor-pointer"> 
+        <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
           Sign out
         </span>
       </div>
