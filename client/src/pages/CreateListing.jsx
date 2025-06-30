@@ -7,7 +7,7 @@ import {
 import React, { useState } from "react";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -28,7 +28,7 @@ export default function CreateListing() {
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   console.log(formData);
@@ -146,7 +146,7 @@ export default function CreateListing() {
         setLoading(false);
       }
       setLoading(false);
-      navigate(`listing/${data._id}`)
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -351,7 +351,9 @@ export default function CreateListing() {
                 </div>
               );
             })}
-          <button disbled={loading || uploading} className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
+          <button
+            disbled={loading || uploading}
+            className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
             {loading ? "Creating..." : "Create Listing"}
           </button>
           {error && <p className="text-red-700 text-sm">{error}</p>}
