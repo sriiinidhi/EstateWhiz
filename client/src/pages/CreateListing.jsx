@@ -167,7 +167,6 @@ export default function CreateListing() {
                rounded-lg"
             id="name"
             maxLength="62"
-            minLength="10"
             required
             onChange={handleChange}
             value={formData.name}
