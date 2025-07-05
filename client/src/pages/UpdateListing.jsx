@@ -49,7 +49,7 @@ export default function UpdateListing() {
   }, []);
 
   const handleImageSubmit = (e) => {
-    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+    if (files.length > 0 && files.length + formData.imageUrls.length < 11) {
       setUploading(true);
       setImageUploadError(false);
       const promises = [];
@@ -71,7 +71,7 @@ export default function UpdateListing() {
           setUploading(false);
         });
     } else {
-      setImageUploadError("You can only upload 6 images per listing");
+      setImageUploadError("You can only upload 10 images per listing");
       setUploading(false);
     }
   };
@@ -327,7 +327,7 @@ export default function UpdateListing() {
           <p className="font-semibold">
             Images:
             <span className="font-normal text-gray-600 ml-2">
-              The first image will be the cover (max 6)
+              The first image will be the cover (max 10)
             </span>
           </p>
           <div className="flex gap-4">
