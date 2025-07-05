@@ -5,7 +5,6 @@ import { app } from "../firebase";
 import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure,signOutStart, signOutSuccess, signOutFailure } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { get, set } from "mongoose";
 
 export default function Profile() {
   const fileRef= useRef(null);
