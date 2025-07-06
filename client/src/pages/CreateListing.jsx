@@ -51,7 +51,7 @@ export default function CreateListing() {
           setUploading(false);
         })
         .catch((error) => {
-          setImageUploadError("Image upload failed (2 mb max per image ");
+          setImageUploadError("Image upload failed (2 mb max per image) ");
           setUploading(false);
         });
     } else {
@@ -356,7 +356,7 @@ export default function CreateListing() {
               );
             })}
           <button
-            disbled={loading || uploading}
+            disabled={loading || uploading}
             className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
             {loading ? "Creating..." : "Create Listing"}
           </button>

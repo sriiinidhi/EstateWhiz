@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useRef, useState, useEffect, use} from "react";
+import { useRef, useState, useEffect} from "react";
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage";
 import { app } from "../firebase"; 
 import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure,signOutStart, signOutSuccess, signOutFailure } from "../redux/user/userSlice";
@@ -153,7 +153,7 @@ const handleListingDelete = async (listingId) => {
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input onChange={(e) => setFile(e.target.files[0])} type="file" ref={fileRef} hidden accept='image/* '/>
+        <input onChange={(e) => setFile(e.target.files[0])} type="file" ref={fileRef} hidden accept='image/*'/>
         <img onClick={() => fileRef.current.click()}
           src={formData.avatar || currentUser.avatar}
           alt="profile"

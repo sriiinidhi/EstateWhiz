@@ -5,6 +5,8 @@ import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
 dotenv.config();
 
 const app= express();
@@ -15,14 +17,14 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
 }).catch(err => {
   console.error('Error connecting to MongoDB:', err);
 });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
 app.use('/api/listing', listingRouter);
 
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
-});
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
@@ -32,4 +34,12 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
+});
+
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on http://localhost:3000');
 });
